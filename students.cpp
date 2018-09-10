@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <algorithm>
 #include <cstring>
@@ -12,9 +13,7 @@ struct Student {
   double gpa;
 };
 
-
-
-void add(std::vector<Student*> students) {
+void add(std::vector<Student*> &students) {
   Student* student = new Student;
   char buffer[255];
   char* first = new char[255];
@@ -45,13 +44,13 @@ void add(std::vector<Student*> students) {
   std::cout << "Student added to list" << std::endl;
 }
 
-void print(std::vector<Student*> students) {
+void print(std::vector<Student*> &students) {
   for (Student* student : students) {
-    std::cout << student->firstName << " " << student->lastName << ", " << student->id << ", " << roundf(student->gpa * 100) / 100 << std::endl;
+    std::cout << student->firstName << " " << student->lastName << ", " << student->id << ", " << std::fixed << std::showpoint << std::setprecision(2) << student->gpa << std::endl;
   }
 }
 
-void remove(std::vector<Student*> students, int id) {
+void remove(std::vector<Student*> &students, int id) {
   students.erase(std::remove_if(students.begin(), students.end(), [id](const Student* o) {
 	if (o->id == id) { std::cout << "Student deleted" << std::endl; return true; }; }), students.end());
 }
