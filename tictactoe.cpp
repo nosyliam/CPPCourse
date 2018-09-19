@@ -52,6 +52,9 @@ public:
     char val[2];
 
     std::cin.getline(val, sizeof(turn));
+	
+	if (strlen(val) != 2)
+	  return;
     
     // must be in the format (a-c)(1-3)
     if ((val[0] < 96 && val[0] > 100) || (val[1] < 48 && val[1] > 52))
@@ -148,11 +151,14 @@ public:
 
   int playAgain() {
     char choice;
-    std::cin >> choice;
-
+    std::cin.get(choice);
+		
     if (choice == 'y') {
       turn = player;
       memset(data, 0, sizeof(data));
+	  std::cout << std::endl;
+	  render();
+	  std::cout << "What spot would you like to take?: ";
       return 1;
     } else if (choice == 'n') {
       return 0;
@@ -174,7 +180,7 @@ public:
     
     if (winning(x) || winning(o)) {
       const char* winner = winning(o) ? "AI" : "You";
-      std::cout << winner << " won! Play again? (y/n):";
+      std::cout << winner << " won! Play again? (y/n): ";
       turn = end;
       return 1;
     }
