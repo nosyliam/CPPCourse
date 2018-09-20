@@ -5,7 +5,8 @@
 
 char* strip(char* input) {
   char* stripped = new char[80];
-  int pos;
+  memset(stripped, '\0', 80);
+  int pos = 0;
   
   for (; *input != '\0'; input++) {
     if ((*input > 31 && *input < 48) || (*input > 57 && *input < 65))
@@ -40,6 +41,7 @@ int main() {
     else
       std::cout << "Not a palindrome." << std::endl;
 
+    memset(input, '\0', 80);
     delete stripped;
   }
   return 0;
