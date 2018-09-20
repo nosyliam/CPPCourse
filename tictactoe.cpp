@@ -78,7 +78,7 @@ public:
       }
     }
     
-    if (n == 8) {
+    if (n > 7) {
       // All available spots are taken
       return true;
     } else {
@@ -138,6 +138,9 @@ public:
   }
 
   void calculateTurn() {
+    if (checkDraw())
+      return;
+    
     std::pair<int, int> move = minimax(o);
     setCell(move.second, o);
     render();
@@ -188,9 +191,11 @@ public:
     switch (turn) {
     case player:
       receiveTurn();
+      return 1;
       break;
     case ai:
       calculateTurn();
+      return 1;
       break;
     }
     
