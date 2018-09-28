@@ -122,7 +122,7 @@ int main() {
       }
     }
 
-    if (!strcmp(command, "QUIT", 4))
+    if (!strcmp(command, "QUIT"))
       return 0;
   }
 }
