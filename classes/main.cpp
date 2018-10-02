@@ -5,10 +5,10 @@
 #include <vector>
 #include <cstring>
 #include <memory>
-#include <media.h>
-#include <game.h>
-#include <music.h>
-#include <movie.h>
+#include "media.h"
+#include "game.h"
+#include "music.h"
+#include "movie.h"
 
 // Use a mode enum to combine multiple searching modes
 // into as single function.
@@ -47,6 +47,7 @@ int main() {
   // Mainloop
   while (true) {
     char command[80];
+    memset(command, '\0', sizeof(command));
 
     std::cout << "> ";
     std::cin.getline(command, sizeof(command));

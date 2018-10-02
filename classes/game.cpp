@@ -1,14 +1,14 @@
 #include <iostream>
 #include <cstdlib>
 #include <cstring>
-#include <game.h>
+#include "game.h"
 
 MediaType Game::Type() {
   return MediaType::Game;
 }
 
 void Game::Display() {
-  std::cout << Title() << " (" << Year() << ") by " << Publisher() << " rated " << Rating(); 
+  std::cout << Title() << " (" << Year() << ") by " << Publisher() << " rated " << Rating() << std::endl;
 }
 
 // Fill publisher and rating

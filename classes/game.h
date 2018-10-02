@@ -13,5 +13,5 @@ class Game : public Media {
   
  private:
   std::string m_publisher;
-  int m_rating;
+  int m_rating = 0;
 };
