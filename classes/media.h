@@ -64,6 +64,6 @@ class Media {
   
   
  private:
-  std::string m_title;
+  std::string m_title = "";
   int m_year = 0;
 };

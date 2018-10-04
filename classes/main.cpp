@@ -104,17 +104,19 @@ int main() {
       // We'll conveniently predefine a predicate for std::remove_if -- it uses
       // a pretty hacky ternary operation to keep everything in a 1-liner while
       // still counting the number of records deleted.
+
+      
       if (!strncmp(command + 7, "TITLE", 5)) {
 	const auto val = static_cast<std::string>(command + 13);
 	pred = [&] (const std::shared_ptr<Media> o) { return (o->Title() == val) ? (bool) ++count : false; };
+	objects.erase(std::remove_if(objects.begin(), objects.end(), pred), objects.end());
       } else if (!strncmp(command + 7, "YEAR", 4)) {
 	const auto val = atoi(command + 12);
 	pred = [&] (const std::shared_ptr<Media> o) { return (o->Year() == val) ? (bool) ++count : false; };
+	objects.erase(std::remove_if(objects.begin(), objects.end(), pred), objects.end());
       } else {
 	continue;
       }
-
-      objects.erase(std::remove_if(objects.begin(), objects.end(), pred), objects.end());
 
       if (!count) {
 	std::cout << "Nothing to delete." << std::endl;
