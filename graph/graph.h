@@ -1,31 +1,27 @@
 #pragma once
 #include <unordered_map>
 #include <cstring>
+#include <iostream>
+#include <iomanip>
+#include <limits>
+#include <vector>
+#include <queue>
 
 class Graph {
  public:
   Graph() {};
-  ~Graph() {};
+  ~Graph();
 
-  int insert(std::string label) {
-    // Reconstruct adjacency table
-    bool** ptr = new bool*[++nodes];
-    bool* pool = new bool[nodes * nodes];
-    // Assign row pointers to their appropriate column pointers
-    for (unsigned n = 0; n < nodes; ++n, pool += nodes) {
-      ptr[n] = pool;
-      // If old data exists, copy it
-      if (adjacency && n >= nodes)
-      	memcpy(pool, adjacency[n], nodes - 1);
-    }
-
-    adjacency = ptr;
-    labels[label] = nodes;
-    return nodes;
-  }
-  bool** adjacency = nullptr;
+  int insert(std::string label);
+  void remove(std::string label);
+  bool connect(std::string start, std::string end, char weight);
+  bool disconnect(std::string start, std::string end);
+  void findShortest(std::string start, std::string end);
+  void display();
+  
  private:
-  //bool** adjacency = nullptr;
+  char** adjacency = nullptr;
   std::unordered_map<std::string, int> labels;
-  int nodes = 0;
+  std::unordered_map<int, std::string> names;
+  int nodes = 0, maxName = 3;
 };
