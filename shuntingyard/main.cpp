@@ -157,6 +157,7 @@ char* compileInfix(char* input) {
 int main() {
   char buf[255];
 
+  std::cout << "Your expression must be seperated by spaces and have a space at the end." << std::endl;
   std::cout << "Enter mathematical expression: ";
   std::cin.getline(buf, sizeof(buf));
 
