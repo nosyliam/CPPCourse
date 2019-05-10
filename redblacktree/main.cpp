@@ -5,7 +5,12 @@
 #include <stdexcept>
 #include "tree.hpp"
 
+Tree::Node* Tree::Node::sentinel = new Tree::Node();
+
 int main() {
+  Tree::Node::sentinel->left = Tree::Node::sentinel;
+  Tree::Node::sentinel->right = Tree::Node::sentinel;
+  
   Tree rbtree;
   std::string in;
   std::cout << "Enter filename or space-seperated numbers: ";

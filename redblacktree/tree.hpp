@@ -4,14 +4,18 @@
 #include <cmath>
 #include <cstring>
 
+#define LEAF Tree::Node::sentinel
+
 enum class Color {
   Red,
   Black
 };
 
 class Tree {
+public:
   struct Node {
-    Node(int value = 0) : value(value) {};
+    Node(int value = 0) : value(value), left(Node::sentinel), right(Node::sentinel) {};
+    static Node * sentinel;
     
     Node* grandparent()
     {
@@ -26,31 +30,43 @@ class Tree {
       if (!parent)
 	return nullptr;
 
-      return (this == parent->left) ? parent->right : parent->left;
+      Node::sentinel->left = Node::sentinel;
+      Node::sentinel->right = Node::sentinel;
+      return (this == parent->right) ? parent->left : parent->right;
     };
     
     Node* uncle()
     {
       if (!grandparent())
 	return nullptr;
-
+      
       return parent->sibling();
     };
 
     int depth()
     {
       int n = 1;
-      if (left)
+      if (left != Node::sentinel)
 	n = 1 + left->depth();
 
-      if (right)
+      if (right != Node::sentinel)
 	n = (right->depth() + 1 > n) ? 1 + right->depth() : n;
 
       return n;
     };
+
+    Node *operator->()
+    {
+      std::cout << "ACCESS" << std::endl;
+      if (this == LEAF) {
+	LEAF->color = Color::Black;
+      }
+
+      return nullptr;
+    }
     
-    Node* parent = nullptr, *left = nullptr, *right = nullptr;
-    Color color = Color::Red;
+    Node* parent = nullptr, *left = Node::sentinel, *right = Node::sentinel;
+    Color color = Color::Black;
     int value;
   };
   
