@@ -97,7 +97,7 @@ void Tree::remove(int n) {
     return;
 
   // Node is root
-  if (base == root) {
+  if (base == root && base->left == LEAF && base->right == LEAF) {
     delete base;
     root = nullptr;
     return;
